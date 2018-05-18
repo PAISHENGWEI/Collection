@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>月曆</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <style>
+        td:hover {
+            background-color: rgb(37, 187, 179);
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/solid.css" integrity="sha384-29Ax2Ao1SMo9Pz5CxU1KMYy+aRLHmOu6hJKgWiViCYpz3f9egAJNwjnKGgr+BXDN"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/fontawesome.css" integrity="sha384-Lyz+8VfV0lv38W729WFAmn77iH5OSroyONnUva4+gYaQTic3iI2fnUKtDSpbVf0J"
+        crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row ">
+            <div class="col-2 " style="border:black;height:100px;">
+                <button type="button" class="btn btn-secondary mt-4" id="left">
+                    <i class="fas fa-caret-left"></i>
+                </button>
+
+            </div>
+            <div class="col-8 text-center " style="border:black;height:100px;" id="mon">
+                
+            </div>
+            <div class="col-2 text-right " style="border:black;height:100px;">
+                <button type="button" class="btn btn-secondary mt-4" id="right">
+                    <i class="fas fa-caret-right"></i>
+                </button>
+            </div>
+        </div>
+        <table class="table ">
+            <tr class="text-center">
+                <th id="Sun">Sun</th>
+                <th id="Mon">Mon</th>
+                <th id="Tue">Tue</th>
+                <th id="Wed">Wed</th>
+                <th id="Thu">Thu</th>
+                <th id="Fri">Fri</th>
+                <th id="Sat">Sat</th>
+            </tr>
+        </table>
+        <table class="table table-bordered border-dark text-center" id="table">
+
+        </table>
+
+    </div>
+    <script type="text/javascript">
+        var table = document.getElementById("table");
+        var rightbt = document.getElementById("right");
+        var leftbt = document.getElementById("left");
+        //var width = document.createElement("td");
+        var date = new Date();
+        
+        function create() {
+            date.setDate(1);
+            var months=date.getMonth();
+            while (date.getDay() != 0) {
+                date.setDate(date.getDate() - 1);
+            }
+            
+            for (var i = 0; i < 6; i++) {
+                var row = document.createElement("tr");
+                for (var j = 0; j < 7; j++) {
+                    var width = document.createElement("td");
+                    width.innerHTML = date.getDate();
+                    if(months!=date.getMonth())
+                    {
+                        width.style="background-color:gray;";
+                    }
+                    date.setDate(date.getDate() + 1);
+                    row.appendChild(width);
+                    /*if (width.innerHTML!=date.getDate() ) {
+
+                        width.style.backgroundColor = "gray";
+
+                    }*/
+                }
+                //document.write("</br>");
+                table.appendChild(row);
+            }
+        }
+        
+
+        function createmonth() {
+            var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
+                'October', 'November', 'December'
+            ];
+
+            var month = months[date.getMonth()];
+            var h1 = document.createElement("h1");
+            h1.innerText = month;
+            document.getElementById("mon").appendChild(h1);
+
+        }
+        function createyear(){
+            var year=date.getFullYear();
+            var h5=document.createElement("h5");
+            h5.innerText=year;
+            document.getElementById("mon").appendChild(h5);
+        }
+        createmonth();
+        createyear()
+        create();
+
+        /*function myFunction() {
+            if (width.innerText != date.getDate()) {
+
+                width.style.backgroundColor = "gray";
+
+            }
+        }
+        myFunction();*/
+
+        
+        function monclean() {
+            while (mon.hasChildNodes()) {
+                mon.removeChild(mon.firstChild);
+            }
+        }
+
+        function clean() {
+            while (table.hasChildNodes()) {
+                table.removeChild(table.firstChild);
+            }
+        }
+        rightbt.onclick = function () {
+            clean();
+            monclean();
+            createmonth();
+            createyear();            
+            create();
+        }
+        leftbt.onclick = function () {
+            clean();
+            monclean();
+            date.setMonth(date.getMonth() - 2);
+            createmonth();
+            createyear();
+            create();
+        }
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

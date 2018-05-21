@@ -1,3 +1,3 @@
 # Collection
 作品集
-![Foo]{collection/image/trello.png]
+![Foo]{https://github.com/PAISHENGWEI/Collection/blob/master/image/Trello.png?raw=true]
